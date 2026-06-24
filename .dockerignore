@@ -1,0 +1,15 @@
+**/bin/
+**/obj/
+**/out/
+**/publish/
+.git/
+.gitignore
+.dockerignore
+.vs/
+.vscode/
+.idea/
+*.user
+*.log
+client/
+README.md
+docker-compose.yml

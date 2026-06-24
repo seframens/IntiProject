@@ -1,0 +1,44 @@
+<Window x:Class="ProjectChecking.Wpf.Views.Dialogs.UserEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Пользователь"
+        Height="600" Width="460"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="White">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock x:Name="HeaderText" Text="Новый пользователь" FontSize="18" FontWeight="Bold" Margin="0,0,0,12"
+                       Foreground="{StaticResource PrimaryBrush}"/>
+            <TextBlock Text="Логин"/>
+            <TextBox x:Name="LoginBox"/>
+            <TextBlock Text="ФИО"/>
+            <TextBox x:Name="FullNameBox"/>
+            <TextBlock Text="Роль"/>
+            <ComboBox x:Name="RoleBox" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+            <TextBlock x:Name="SelfRoleHint"
+                       Text="Нельзя изменить собственную роль, чтобы не потерять права администратора."
+                       Foreground="{StaticResource DangerBrush}" TextWrapping="Wrap" Margin="0,4,0,0"
+                       Visibility="Collapsed"/>
+            <TextBlock Text="Телефон"/>
+            <TextBox x:Name="PhoneBox"/>
+            <TextBlock Text="Дата рождения"/>
+            <DatePicker x:Name="BirthDatePicker"/>
+            <TextBlock x:Name="PasswordLabel" Text="Пароль"/>
+            <PasswordBox x:Name="PasswordBox"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" x:Name="ErrorText" Foreground="{StaticResource DangerBrush}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Content="Отмена" Style="{StaticResource SecondaryButton}" Click="OnCancel"/>
+            <Button x:Name="SaveButton" Content="Сохранить" Click="OnSave" IsDefault="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

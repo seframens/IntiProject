@@ -1,0 +1,29 @@
+<UserControl x:Class="ProjectChecking.Wpf.Views.Pages.QualificationsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="White">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Квалификации руководителей" FontSize="20" FontWeight="Bold" Margin="0,0,0,12"
+                   Foreground="{StaticResource PrimaryBrush}"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,8">
+            <Button Content="Добавить" Click="OnAdd"/>
+            <Button Content="Изменить" Style="{StaticResource SecondaryButton}" Click="OnEdit"/>
+            <Button Content="Удалить" Style="{StaticResource DangerButton}" Click="OnDelete"/>
+            <Button Content="Обновить" Style="{StaticResource SecondaryButton}" Click="OnRefresh"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" x:Name="Grid" MouseDoubleClick="OnGridDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

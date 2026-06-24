@@ -1,0 +1,87 @@
+<UserControl x:Class="ProjectChecking.Wpf.Views.Pages.ProjectsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="White">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="HeaderText" Text="Проекты" FontSize="20" FontWeight="Bold" Margin="0,0,0,12"
+                   Foreground="{StaticResource PrimaryBrush}"/>
+
+        <Grid Grid.Row="1" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                <TextBlock Text="Поиск..."/>
+                <TextBox x:Name="SearchBox" KeyDown="OnSearchKey"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                <TextBlock Text="Статус"/>
+                <ComboBox x:Name="StatusBox">
+                    <ComboBoxItem Content="(все)" IsSelected="True"/>
+                    <ComboBoxItem Content="в очереди"/>
+                    <ComboBoxItem Content="активен"/>
+                    <ComboBoxItem Content="выполнен"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel x:Name="LeaderFilterPanel" Grid.Column="2" Margin="0,0,8,0">
+                <TextBlock Text="Руководитель"/>
+                <ComboBox x:Name="LeaderFilterBox" DisplayMemberPath="FullName" SelectedValuePath="Id"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Margin="0,0,8,0">
+                <TextBlock Text="С даты"/>
+                <DatePicker x:Name="FromDatePicker"/>
+            </StackPanel>
+            <StackPanel Grid.Column="4" Margin="0,0,8,0">
+                <TextBlock Text="По дату"/>
+                <DatePicker x:Name="ToDatePicker"/>
+            </StackPanel>
+            <StackPanel Grid.Column="5" VerticalAlignment="Bottom" Orientation="Horizontal">
+                <Button Content="Применить" Click="OnApplyFilters"/>
+                <Button Content="Сброс" Style="{StaticResource SecondaryButton}" Click="OnResetFilters"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,8">
+            <Button x:Name="CreateBtn" Content="Создать" Click="OnCreate"/>
+            <Button x:Name="EditBtn" Content="Изменить" Style="{StaticResource SecondaryButton}" Click="OnEdit"/>
+            <Button x:Name="DeleteBtn" Content="Удалить" Style="{StaticResource DangerButton}" Click="OnDelete"/>
+            <Button x:Name="StartBtn" Content="Начать работу" Click="OnStart"/>
+            <Button x:Name="CompleteBtn" Content="Завершить" Click="OnComplete"/>
+            <Button x:Name="UncompleteBtn" Content="Отменить завершение" Style="{StaticResource SecondaryButton}" Click="OnUncomplete"/>
+            <Button x:Name="CsvBtn" Content="Импорт CSV" Style="{StaticResource SecondaryButton}" Click="OnImportCsv"/>
+            <Button x:Name="PdfBtn" Content="Экспорт PDF" Style="{StaticResource SecondaryButton}" Click="OnExportPdf"/>
+            <Button Content="Обновить" Style="{StaticResource SecondaryButton}" Click="OnRefresh"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="3" x:Name="Grid" MouseDoubleClick="OnGridDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60" CanUserSort="False"/>
+                <DataGridTextColumn Header="Тема" Binding="{Binding ActivityName}" Width="*" CanUserSort="False"/>
+                <DataGridTextColumn Header="Заказчик" Binding="{Binding Customer}" Width="200" CanUserSort="False"/>
+                <DataGridTextColumn Header="Руководитель" Binding="{Binding LeaderFullName}" Width="250" CanUserSort="False"/>
+                <DataGridTextColumn Header="Создан" Binding="{Binding CreationDate, StringFormat=dd.MM.yyyy}" Width="100"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="120" CanUserSort="False"/>
+                <DataGridTextColumn Header="Завершён" Binding="{Binding CompletionDate, StringFormat=dd.MM.yyyy}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+            <TextBlock x:Name="PageInfo" Margin="0,0,12,0" VerticalAlignment="Center"/>
+            <Button Content="◀" Click="OnPrevPage" Style="{StaticResource SecondaryButton}"/>
+            <Button Content="▶" Click="OnNextPage" Style="{StaticResource SecondaryButton}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
